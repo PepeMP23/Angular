@@ -1,0 +1,55 @@
+<div class="container">
+
+  <div class="score-board">
+    <h3>Score</h3>
+    <div class="score-row" *ngFor="let winner of this.winnersBoard; let i = index;">
+      <div>{{ i + 1 }}</div>
+      <div>Jugador {{ winner.player }}</div>
+      <div> {{ winner.date | date : 'dd/MM/YYYY' }} </div>
+    </div> <!-- Score row -->
+    <div class="action" (click)="this.showScoreBoard = false;">
+      <a>Cerrar</a>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!showScoreBoard">
+    <div class="tie-banner" *ngIf="this.gameStatus === 'tie'">
+      <p>¡El jugador  {{this.playerWinner}} es ganador!</p>
+      <button (click)="this.newGame()">Volver a jugar</button>
+
+      <div class="action" (click)="this.showScoreBoard = true">
+        <a> Mostrar resultados</a>
+      </div>
+    </div>
+  </ng-container>
+
+
+
+  <div class="winner-banner" *ngIf="this.gameStatus === 'win'">
+    <p>¡El jugador  {{this.playerWinner}} es ganador!</p>
+    <button (click)="this.newGame()">Volver a jugar</button>
+
+    <div class="action" (click)="this.showScoreBoard = true">
+      <a> Mostrar resultados</a>
+    </div>
+  </div>
+
+  <div *ngIf="this.gameStatus === 'play'" class="player--text">
+    Turno: <em [ngClass]="{
+    'actual-player-1': this.player === 1,
+    'actual-player-2': this.player ===2}"> Jugador {{this.player}}
+  </em>
+  </div> <!-- Player Text -->
+
+  <div class="container-grid">
+    <div class="cell" *ngFor="let cell of this.board; let i = index" [ngClass]="{
+      'player1': this.board[i] === 1,
+      'player2': this.board[i] === 2,
+      'placed': this.board[i] != 0
+    }"
+
+    (click)="this.selectCell(i, this.player)"
+    ></div>
+  </div>
+</div>
+

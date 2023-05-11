@@ -1,0 +1,23 @@
+.todo{
+  /* background-color: #90E0EF;*/
+  height: 100vh;
+  width: 100vw;
+}
+
+h1{
+  color: white;
+  text-align: centers;
+  margin-bottom: 25px;
+}
+
+.divisasBloque{
+  border: 10px solid #03045E;
+  border-radius: 5px;
+  background-color: #0096C7;
+  margin: 20vh auto;
+  padding: 20px;
+}
+
+.divisasBloque select, .divisasBloque input{
+  margin-bottom: 25px;
+}
