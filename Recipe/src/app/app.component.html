@@ -31,6 +31,11 @@
      <h6 *ngIf="this.form.controls['ingredients'].dirty &&
      this.form.controls['ingredients'].getError('minlength')" class="text-sm text-red-600">* Caracteres minimos: 10.</h6>
   </div>
+
+  <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <app-card *ngFor="let i of [0,1,2,3,4,5]"></app-card>
+  </div>
+
 </div>
 
 <!--
