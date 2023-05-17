@@ -1,0 +1,67 @@
+<div class="container mx-auto">
+  <div class="bg-white rounded p-4 my-5">
+    <div>
+      <h2 class="text-2xl font-bold text-slate-950">Crea tu receta. Con IA </h2>
+      <app-loader></app-loader>
+    </div> <!-- Titulo -->
+
+    <div [formGroup]="this.form" class="flex mt-4 items-center">
+      <input formControlName="ingredients" placeholder="Ingresa los ingredients de tu receta." class="
+                    border-2
+                    outline-none
+                    w-full
+                    rounded-md
+                    px-4
+                    py-2
+                    transition-all
+                    ease-linear
+                    duration-2
+                    hover:border-slate-600
+                    fouce:border-slate-600
+                    disabled:bg-gray-200
+                    disabled:border-slate-200
+                    disabled:text-gray-500
+                    disabled:cursor-not-allowed
+                    " type="text">
+      <app-button (click)="this.validar()" [disabled]="this.isLoading" [isLoading]="this.isLoading" text="Generar"></app-button>
+    </div>  <!-- Input -->
+    <h6 *ngIf="this.form.controls['ingredients'].dirty &&
+     this.form.controls['ingredients'].getError('required')" class="text-sm text-red-600">* Es requerido que ingreses ingredients para generar la receta.</h6>
+
+     <h6 *ngIf="this.form.controls['ingredients'].dirty &&
+     this.form.controls['ingredients'].getError('minlength')" class="text-sm text-red-600">* Caracteres minimos: 10.</h6>
+  </div>
+</div>
+
+<!--
+<h1>NgModel</h1>
+<label for="">Ingresa tu nombre</label>
+<input [(ngModel)]="nombre" type="text"> {{ nombre }}
+<hr>
+
+<h1>Reactive Forms</h1>
+<div [formGroup]="this.form">
+  <label for="">Nombre</label>
+  <input formControlName="name" type="text">
+  <label for="">Correo electrónico</label>
+  <input formControlName="email" type="email">
+</div>
+<div style="color:red;">
+  <p *ngIf="this.form.invalid">* El formulario es inválido</p>
+  <p *ngIf="
+  this.form.controls['name'].dirty &&
+  this.form.controls['name'].invalid">
+  * Nombre es requerido
+  </p>
+  <p *ngIf="
+  this.form.controls['email'].dirty &&
+  this.form.controls['email'].invalid">
+  * Nombre es requerido
+  </p>
+
+</div>
+<button (click)="this.validar()">Validar</button>
+
+{{ this.form.errors | json }}
+
+-->
