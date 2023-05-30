@@ -1,5 +1,6 @@
 import {Configuration, OpenAIApi} from 'openai';
-import * as axios from 'axios';
+import { Data } from './data.js';
+import axios from 'axios';
 
 export class OpenAIService {
     openai;
@@ -64,6 +65,7 @@ export class OpenAIService {
             stars: 0,
             imageUrl: '',
         };
+        Data.writeFile(generatedRecipe);
         return generatedRecipe;
     }
 
@@ -74,5 +76,23 @@ export class OpenAIService {
         } catch (error) {
             return { error: true };
         }
+    }
+
+    /**
+     * 
+     * @param {string} keywords 
+     */
+    async getPosibleImages(keywords) {
+        const query = axios.get('https://api.unsplash.com/search/photos', {
+            params: {
+                query: keywords.split(' ')[0]
+            },
+            headers: {
+                Authorization: `Client-ID ${process.env['UNSPLASH_KEY']}`
+            }
+        });
+        const response = await query;
+        const images = response.data.results.map((result) => result.urls.regular);
+        return images;
     }
 }
